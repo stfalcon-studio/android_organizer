@@ -36,9 +36,13 @@ public class OrganizerApp extends Application{
         Set<String> notes = sharedPreferences.getStringSet(NOTES, new HashSet<String>());
         hashSet.add(note);
         hashSet.addAll(notes);
-        sharedPreferences.edit().putStringSet(NOTES, hashSet).commit();
+        saveSetInPreferences(hashSet);
     }
 
+
+    public void saveSetInPreferences(Set<String> set){
+        sharedPreferences.edit().putStringSet(NOTES, set).commit();
+    }
 
     public Set<String> getSavedNotes(){
         return sharedPreferences.getStringSet(NOTES, new HashSet<String>());

@@ -5,15 +5,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class HomeActivity extends Activity {
 
     private ListView listViewNotes;
+    private HashSet<String> notes;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -31,10 +35,21 @@ public class HomeActivity extends Activity {
     private void initViews(){
         listViewNotes = (ListView) findViewById(R.id.list_notes);
         listViewNotes.setEmptyView((TextView) findViewById(R.id.empty_view));
+
+       listViewNotes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+           @Override
+           public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+               notes.remove(listViewNotes.getItemAtPosition(position));
+               HashSet<String> newSet = new HashSet<String>();
+               newSet.addAll(notes);
+               OrganizerApp.getInstans().saveSetInPreferences(newSet);
+               getData();
+           }
+       });
     }
 
     private void getData(){
-        Set<String> notes = OrganizerApp.getInstans().getSavedNotes();
+        notes = (HashSet<String>) OrganizerApp.getInstans().getSavedNotes();
         ArrayAdapter adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, notes.toArray(new String[notes.size()]));
         listViewNotes.setAdapter(adapter);
