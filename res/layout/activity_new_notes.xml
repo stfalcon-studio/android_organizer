@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:animateLayoutChanges="true">
+
+
+    <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="150dp"
+            android:singleLine="false"
+            android:hint="Enter your notes"
+            android:id="@+id/editText"/>
+
+    <CheckBox android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="Set Alarm"
+              android:id="@+id/cb_alarm"/>
+
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="5">
+
+        <DatePicker
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:calendarViewShown="false"
+                android:id="@+id/date"
+                android:visibility="gone"/>
+
+        <TimePicker android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:id="@+id/time"
+                        android:visibility="gone"/>
+    </LinearLayout>
+
+
+    <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Create"
+            android:id="@+id/btn_create"
+            android:layout_gravity="center_horizontal"/>
+</LinearLayout>
